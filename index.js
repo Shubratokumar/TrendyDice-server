@@ -38,8 +38,8 @@ async function run() {
               is_paid : true,
             } 
           }
-          const updatePayment = await studentsCollection.updateOne(filter, updatedDoc, options);
-          res.send(updatePayment);
+          const paymentStatus = await studentsCollection.updateOne(filter, updatedDoc, options);
+          res.send(paymentStatus);
         })
 
     } finally {
