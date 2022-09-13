@@ -24,12 +24,12 @@ async function run() {
       const studentsCollection = client.db("TrendyDice").collection("student");
 
         //  load all students
-        app.get('/student', async(req,res)=>{
+        app.get('/student', async(req,res) => {
             const result = await studentsCollection.find().toArray();
             res.send(result);
         })
 
-        app.put("/student/:id", async(req, res) =>{
+        app.put("/student/:id", async(req, res) => {
           const id = req.params.id;
           const filter = { _id: ObjectId(id) };
           const options = { upsert: true };
