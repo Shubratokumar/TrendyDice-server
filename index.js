@@ -31,11 +31,12 @@ async function run() {
 
         app.put("/student/:id", async(req, res) => {
           const id = req.params.id;
+          const paidStatus = req.body;
           const filter = { _id: ObjectId(id) };
           const options = { upsert: true };
           const updatedDoc = {
             $set: {
-              is_paid : true,
+               paidStatus
             } 
           }
           const paymentStatus = await studentsCollection.updateOne(filter, updatedDoc, options);
