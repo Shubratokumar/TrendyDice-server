@@ -1,8 +1,7 @@
 const express = require("express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
 const port = process.env.PORT || 5000;
 
 
@@ -35,9 +34,7 @@ async function run() {
           const filter = { _id: ObjectId(id) };
           const options = { upsert: true };
           const updatedDoc = {
-            $set: {
-               paidStatus
-            } 
+            $set:  paidStatus
           }
           const paymentStatus = await studentsCollection.updateOne(filter, updatedDoc, options);
           res.send(paymentStatus);
