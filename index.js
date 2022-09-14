@@ -24,8 +24,13 @@ async function run() {
 
         //  load all students
         app.get('/student', async(req,res) => {
-            const result = await studentsCollection.find().toArray();
-            res.send(result);
+          const limit = Number(req.query.limit);
+          const pageNumber = Number(req.query.pageNumber);
+          const result = await studentsCollection.find().skip(limit*pageNumber).limit(limit).toArray();
+
+          const count = await studentsCollection.estimatedDocumentCount();
+
+          res.send({ data: result, count });
         })
 
         app.put("/student/:id", async(req, res) => {
